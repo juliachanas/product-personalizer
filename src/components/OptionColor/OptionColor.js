@@ -30,7 +30,7 @@ const OptionColor = ({ colors, currentColor, setCurrentColor }) => {
 };
 
 OptionColor.propTypes = {
-  colors: PropTypes.arrayOf(PropTypes.string).isRequired, //zwraca tablicę okrelonego typu tu string
+  colors: PropTypes.arrayOf(PropTypes.string).isRequired,
   currentColor: PropTypes.string.isRequired,
 };
 export default OptionColor;

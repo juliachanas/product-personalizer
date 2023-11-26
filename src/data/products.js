@@ -9,8 +9,8 @@ const productsData = [
       { name: 'S', additionalPrice: 0 },
       { name: 'M', additionalPrice: 5 },
       { name: 'L', additionalPrice: 6 },
-      { name: 'XL', additionalPrice: 8 }
-    ]
+      { name: 'XL', additionalPrice: 8 },
+    ],
   },
   {
     id: 2,
@@ -22,9 +22,9 @@ const productsData = [
       { name: 'S', additionalPrice: 0 },
       { name: 'M', additionalPrice: 2 },
       { name: 'L', additionalPrice: 3 },
-      { name: 'XL', additionalPrice: 4 }
-    ]
-  }
+      { name: 'XL', additionalPrice: 4 },
+    ],
+  },
 ];
 
 export default productsData;
