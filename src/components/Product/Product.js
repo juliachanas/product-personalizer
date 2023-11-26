@@ -1,17 +1,18 @@
 import PropTypes from 'prop-types';
 import styles from './Product.module.scss';
 import ProductImage from '../ProductImage/ProductImage';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import ProductForm from '../ProductForm/ProductForm';
 
 const Product = ({ name, id, title, colors, sizes, basePrice }) => {
   const [currentColor, setCurrentColor] = useState(colors[0]);
   const [currentSize, setCurrentSize] = useState(sizes[0].name);
 
-  const getPrice = () => {
+  //LEPSZA WYDAJNOŚĆ - wywołuje się tylko wtedy gdy coś się zmieni
+  const price = useMemo(() => {
     const chosenSize = sizes.find((size) => size.name === currentSize); //znajduję obiekt w tablicy sizes, którego właściwość name odpowiada wartości currentSize.
     return basePrice + (chosenSize ? chosenSize.additionalPrice : 0); //{ jeśli chosenSize istnieje (nie jest undefined), to użyj chosenSize.additionalPrice, w przeciwnym razie użyj 0.}
-  };
+  }, [currentSize, basePrice, sizes]); // funkcja odświeżana, gdy któraś z tych wartości się zmieni
 
   const handleAddToCart = (e) => {
     e.preventDefault();
@@ -21,7 +22,7 @@ const Product = ({ name, id, title, colors, sizes, basePrice }) => {
     console.log(
       `Name: ${name[0].toUpperCase() + name.substr(1).toLowerCase()} shirt`
     );
-    console.log(`Price: ${getPrice()}$`);
+    console.log(`Price: ${price}$`);
     console.log(`Size: ${currentSize}`);
     console.log(`Color: ${currentColor}`);
   };
@@ -36,7 +37,7 @@ const Product = ({ name, id, title, colors, sizes, basePrice }) => {
       <div>
         <header>
           <h2 className={styles.name}>{title}</h2>
-          <span className={styles.price}>Price: {getPrice()}$</span>
+          <span className={styles.price}>Price: {price}$</span>
         </header>
         <ProductForm
           sizes={sizes}
